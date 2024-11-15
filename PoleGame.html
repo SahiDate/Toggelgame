@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle Switches</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      margin: 0;
+    }
+
+    .toggle-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      font-family: Arial, sans-serif;
+      background-color:aliceblue;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .toggle {
+      display: flex;
+      align-items: center;
+    }
+
+    .switch {
+      position: relative;
+      width: 50px;
+      height: 25px;
+      margin-right: 15px;
+      background-color: #ccc;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    .switch input {
+      display: none;
+    }
+
+    .slider {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 21px;
+      height: 21px;
+      background-color: #fff;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+
+    input:checked + .slider {
+      transform: translateX(25px);
+      background-color: green;
+    }
+    
+
+    .label {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="toggle-container">
+  <h1>Sacrifice one</h1>
+  <div class="toggle">
+    <label class="switch">
+      <input type="checkbox" id="beautifulToggle" onclick="toggleSwitch('beautifulToggle')">
+      <span class="slider"></span>
+    </label>
+    <span class="label">Beautiful</span>
+  </div>
+  
+  <div class="toggle">
+    <label class="switch">
+      <input type="checkbox" id="dahejToggle" onclick="toggleSwitch('dahejToggle')">
+      <span class="slider"></span>
+    </label>
+    <span class="label">Dahej</span>
+  </div>
+  
+  <div class="toggle">
+    <label class="switch">
+      <input type="checkbox" id="sealToggle" onclick="toggleSwitch('sealToggle')">
+      <span class="slider"></span>
+    </label>
+    <span class="label">Seal Packed</span>
+  </div>
+</div>
+
+<script>
+  function toggleSwitch(selectedToggleId) {
+    // Get all toggle IDs
+    const toggleIds = ['beautifulToggle', 'dahejToggle', 'sealToggle'];
+    
+    toggleIds.forEach(toggleId => {
+      const checkbox = document.getElementById(toggleId);
+      // Turn off the selected toggle and turn on the others
+      if (toggleId === selectedToggleId) {
+        checkbox.checked = false;
+      } else {
+        checkbox.checked = true;
+      }
+    });
+
+    // Change background color based on active switch
+    const activeLabel = document.querySelector(`label[for="${selectedToggleId}"] + .label`).textContent;
+    document.body.style.backgroundColor = selectedToggleId === 'beautifulToggle' ? '#ffcccb' :
+                                          selectedToggleId === 'dahejToggle' ? '#cce7ff' :
+                                          '#ccffcc';
+
+    console.log(`${activeLabel} is OFF; other switches are ON`);
+  }
+</script>
+
+</body>
+</html>
